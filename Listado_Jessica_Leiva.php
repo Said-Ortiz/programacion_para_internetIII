@@ -14,10 +14,6 @@ $Cantidad = 1;
     <title>Listado de productos</title>
 </head>
 <body>
-    <h1>Producto</h1>
-    <p><strong>Producto:</strong> <?php echo $Producto; ?></p>
-    <p><strong>Precio:</strong> <?php echo $Precio; ?></p>
-    <p><strong>Cantidad:</strong> <?php echo $Cantidad; ?></p>
 
 <h1>Listado de productos</h1>
     <ul>
