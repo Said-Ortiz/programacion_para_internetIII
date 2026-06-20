@@ -5,9 +5,10 @@ require_once __DIR__ . '/../config/conexion.php';
 class EmpleadoController
 {
 
-    // 1. Obtener todos los empleados
-    public static function listar($conexion)
+
+    public static function listar()
     {
+        global $conexion;
         try {
             $sql = 'SELECT * FROM empleados ORDER BY id DESC';
             $stmt = $conexion->prepare($sql);
@@ -18,9 +19,10 @@ class EmpleadoController
         }
     }
 
-    // 2. Registrar un nuevo empleado
-    public static function registrar($conexion, $nombre, $puesto, $salario)
+
+    public static function guardar($nombre, $puesto, $salario)
     {
+        global $conexion;
         $nombre = trim($nombre);
         $puesto = trim($puesto);
         $salario = trim($salario);
@@ -44,9 +46,11 @@ class EmpleadoController
         }
     }
 
-    // 3. Obtener un empleado por su ID (Para edición)
-    public static function obtenerPorId($conexion, $id)
+
+
+    public static function obtenerPorId($id)
     {
+        global $conexion;
         try {
             $sql = 'SELECT * FROM empleados WHERE id = :id';
             $stmt = $conexion->prepare($sql);
@@ -58,9 +62,10 @@ class EmpleadoController
         }
     }
 
-    // 4. Actualizar los datos de un empleado
-    public static function actualizar($conexion, $id, $nombre, $puesto, $salario)
+
+    public static function actualizar($id, $nombre, $puesto, $salario)
     {
+        global $conexion;
         $nombre = trim($nombre);
         $puesto = trim($puesto);
         $salario = trim($salario);
@@ -84,9 +89,10 @@ class EmpleadoController
         }
     }
 
-    // 5. Eliminar un empleado
-    public static function eliminar($conexion, $id)
+
+    public static function eliminar($id)
     {
+        global $conexion;
         try {
             $sql = 'DELETE FROM empleados WHERE id = :id';
             $stmt = $conexion->prepare($sql);
@@ -96,7 +102,7 @@ class EmpleadoController
             return "<div>Error al eliminar: " . $error->getMessage() . "</div>";
         }
 
-        header("Location: " . $_SERVER['PHP_SELF']);
+        header("Location: index.php?msg=eliminado" . $_SERVER['PHP_SELF']);
         exit();
     }
 }
