@@ -1,0 +1,110 @@
+Caso de Estudio: "Sistema de Control de Empleados"
+La empresa TechSolutions necesita un sistema interno para gestionar a su personal. Tu tarea es programar un CRUD completo (Crear, Leer, Actualizar y Eliminar) que permita administrar la información de los empleados utilizando una estructura limpia y ordenada por carpetas.
+
+Requisitos de la Estructura del Proyecto
+El proyecto debe replicar de forma estricta la siguiente organización de directorios y archivos:
+
+gestion-empleados/
+
+│
+
+├── config/
+
+│   └── conexion.php
+
+│
+
+├── controladores/
+
+│   └── EmpleadoController.php
+
+│
+
+├── vistas/
+
+│   ├── modulos/
+
+│   │   ├── sidebar.php
+
+│   │   └── footer.php
+
+│   │
+
+│   ├── inicio.php
+
+│   ├── crear.php
+
+│   └── editar.php
+
+│
+
+└── index.php
+
+
+
+Instrucciones Paso a Paso
+Paso 1: Base de Datos (MySQL)
+Crea una base de datos llamada sistema_empleados y una tabla llamada empleados con los siguientes campos utilizando phpMyAdmin:
+
+id (Entero, Clave Primaria, Autoincrementable)
+
+nombre (Texto, obligatorio)
+
+puesto (Texto, obligatorio)
+
+salario (Decimal con dos decimales, obligatorio)
+
+fecha_ingreso (Timestamp por defecto)
+
+Paso 2: Conexión (config/conexion.php)
+Configura la conexión a la base de datos utilizando la librería PDO dentro de un bloque try-catch para capturar posibles errores de conexión.
+
+Paso 3: Componentes Visuales (vistas/modulos/)
+sidebar.php: Diseña un menú lateral utilizando las clases de fondo oscuro de Bootstrap (bg-dark, text-white). Debe contener dos enlaces que apunten a index.php (para ver la lista) y a index.php?action=crear (para ir al formulario).
+
+footer.php: Diseña un pie de página sencillo con el copyright del año actual generado dinámicamente con PHP.
+
+Nota: Recuerda que el Sidebar debe abrir las etiquetas contenedoras de Bootstrap y el Footer debe cerrarlas para que la estructura visual no se rompa.
+
+Paso 4: El Controlador (controladores/EmpleadoController.php)
+Crea una clase llamada EmpleadoController que contenga los métodos estáticos necesarios para la lógica del negocio:
+
+listar(): Retorna todos los registros de la tabla.
+
+guardar($nombre, $puesto, $salario): Inserta un nuevo empleado y redirige al inicio.
+
+obtenerPorId($id): Busca un empleado específico para poder editarlo.
+
+actualizar($id, $nombre, $puesto, $salario): Modifica los datos y redirige al inicio.
+
+eliminar($id): Borra el registro de la base de datos y redirige.
+
+⚠️ Regla Obligatoria: Todas las consultas SQL que interactúen con variables deben usar sentencias preparadas (prepare() y bindParam()) para evitar inyecciones SQL.
+
+Paso 5: Las Vistas (vistas/)
+inicio.php: Muestra una tabla de Bootstrap (table-hover) con la lista de los empleados y dos botones de acción por cada fila (Editar y Eliminar). El botón eliminar debe pedir confirmación antes de actuar.
+
+crear.php: Un formulario limpio para ingresar el nombre, puesto y salario del empleado.
+
+editar.php: El mismo formulario, pero cargando los datos actuales del empleado seleccionado a través de sus atributos value.
+
+Paso 6: El Enrutador (index.php)
+Este será el archivo central. Debe:
+
+Vincular los estilos de Bootstrap por CDN.
+
+Incluir el controlador de empleados.
+
+Detectar mediante la variable $_GET['action'] qué vista debe renderizar en el centro del diseño.
+
+Estructurar el layout cargando el sidebar.php al inicio, el switch de las vistas en el medio, y el footer.php al final.
+
+Criterios de Evaluación
+Organización: Respeto total a la estructura de carpetas y modularización solicitada.
+
+Funcionalidad: El CRUD debe operar al 100% (insertar, leer, actualizar, borrar) sin generar advertencias (warnings) ni errores de PHP.
+
+Diseño: Uso correcto de Bootstrap para que los formularios y las tablas no se deformen al navegar entre opciones.
+
+Seguridad: Implementación obligatoria de sentencias preparadas en PDO
+
