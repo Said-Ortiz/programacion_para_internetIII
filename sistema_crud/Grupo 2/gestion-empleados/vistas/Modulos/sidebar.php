@@ -13,6 +13,8 @@
             </a>
         </li>
     </ul>
-</div>
+
 <div class="w-100 d-flex flex-column justify-content-between">
     <div class="container-fluid p-4">
+</div>
+</div>
