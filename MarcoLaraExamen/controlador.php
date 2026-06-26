@@ -1,6 +1,9 @@
 <?php
 require_once 'conexion.php';
 
+$mensaje = "";
+$lista_proyectos = [];
+
 if (isset($_POST['btn_registrar'])) {
     $titulo = trim($_POST['titulo']);
     $descripcion = trim($_POST['descripcion']);
@@ -10,8 +13,10 @@ if (isset($_POST['btn_registrar'])) {
 
     $fecha_actual = date('Y-m-d');
 
-    if (!empty($titulo) && !empty($descripcion) && !empty($id_cliente) && !empty($presupuesto) && !empty($fecha_entrega)) {
-        
+    if (empty($titulo) || empty($descripcion) || empty($id_cliente) || empty($presupuesto) || empty($fecha_entrega)) {
+        header("Location: index.php?error=Por favor llene todos los campos");
+        exit();
+    } else {
         if ($fecha_entrega <= $fecha_actual) {
             header("Location: index.php?error=La fecha debe ser futura");
             exit();
@@ -33,9 +38,6 @@ if (isset($_POST['btn_registrar'])) {
                 exit();
             }
         }
-    } else {
-        header("Location: index.php?error=Por favor llene todos los campos");
-        exit();
     }
 }
 
@@ -71,7 +73,6 @@ if (isset($_GET['accion']) && isset($_GET['id'])) {
     }
 }
 
-$lista_proyectos = [];
 try {
     $sql_leer = "SELECT proyectos.*, clientes.nombre_empresa FROM proyectos INNER JOIN clientes ON proyectos.id_cliente = clientes.id WHERE proyectos.estado_activo = 1 ORDER BY proyectos.id DESC";
     $stmt_leer = $conexion->prepare($sql_leer);
@@ -85,6 +86,9 @@ try {
 <?php
 require_once 'conexion.php';
 
+$mensaje = "";
+$lista_proyectos = [];
+
 if (isset($_POST['btn_registrar'])) {
     $titulo = trim($_POST['titulo']);
     $descripcion = trim($_POST['descripcion']);
@@ -94,8 +98,10 @@ if (isset($_POST['btn_registrar'])) {
 
     $fecha_actual = date('Y-m-d');
 
-    if (!empty($titulo) && !empty($descripcion) && !empty($id_cliente) && !empty($presupuesto) && !empty($fecha_entrega)) {
-        
+    if (empty($titulo) || empty($descripcion) || empty($id_cliente) || empty($presupuesto) || empty($fecha_entrega)) {
+        header("Location: index.php?error=Por favor llene todos los campos");
+        exit();
+    } else {
         if ($fecha_entrega <= $fecha_actual) {
             header("Location: index.php?error=La fecha debe ser futura");
             exit();
@@ -117,9 +123,6 @@ if (isset($_POST['btn_registrar'])) {
                 exit();
             }
         }
-    } else {
-        header("Location: index.php?error=Por favor llene todos los campos");
-        exit();
     }
 }
 
@@ -155,7 +158,6 @@ if (isset($_GET['accion']) && isset($_GET['id'])) {
     }
 }
 
-$lista_proyectos = [];
 try {
     $sql_leer = "SELECT proyectos.*, clientes.nombre_empresa FROM proyectos INNER JOIN clientes ON proyectos.id_cliente = clientes.id WHERE proyectos.estado_activo = 1 ORDER BY proyectos.id DESC";
     $stmt_leer = $conexion->prepare($sql_leer);
